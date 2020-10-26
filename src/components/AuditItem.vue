@@ -45,7 +45,7 @@
                     <v-fade-transition>
                         <v-overlay absolute opacity="1.0" v-if="hover">                           
                             <h4>Mark spoof review as:</h4>
-                            <v-switch v-model="isIncorrectResult" label="Wrong" id="wrongSwitch" color="error" />
+                            <v-switch v-model="isIncorrectResult" label="Wrong" id="wrongSwitch" color="error" class="mb-n7"/>
                             <v-switch v-model="isTestSetCandidate" label="Test Candidate" color="primary" />
                         </v-overlay>
                     </v-fade-transition>
