@@ -1,102 +1,47 @@
 <template>
-    <v-row>
-        <v-col>
-            <v-row>
-                <v-col v-for="(item, n) in faces" :key="n" cols="12" md="4">
-                    <v-card class="pa-2" outlined>
-                        <v-list two-line>
-                            <v-list-item>
-                                <v-list-item-avatar>
-                                    <v-img :src="item.face"></v-img>
-                                </v-list-item-avatar>
-                                <v-list-item-content>
-                                    <v-list-item-title>{{ item.status }}</v-list-item-title>
-                                    <v-list-item-subtitle>{{ item.date }}</v-list-item-subtitle>
-                                </v-list-item-content>
-                                <v-list-item-action>
-                                    <v-btn icon @click="item.shown = !item.shown">
-                                        <v-icon>{{ item.shown ? 'expand_less' : 'expand_more' }}</v-icon>
-                                    </v-btn>
-                                </v-list-item-action>
-                            </v-list-item>
-                        </v-list>
+    <v-app>
+        <v-row>
+            <v-col v-for="item in 7" :key="item" cols="12" md="4">
+                <AuditItem></AuditItem>
+            </v-col>
 
-                        <v-card-actions>
-                            <v-progress-linear background-color="danger" color="success" value="15"></v-progress-linear>
-                        </v-card-actions>
-                        
-                        <v-list three-line flat>
-                          <v-list-item two-line>
-                            <v-list-item-content>
-                              <v-list-item-title>{{ item.reason }}</v-list-item-title>
-                              <v-list-item-subtitle>{{ item.scepticism }} possibly a spoof</v-list-item-subtitle>
-                              <v-list-item-subtitle>From {{ item.device }}</v-list-item-subtitle>
-                            </v-list-item-content>
-                          </v-list-item>
-                        </v-list>
-
-                        <v-container>
-                          <v-switch dense v-model="item.isSpoof" label="Mark as spoof" inset></v-switch>
-                          <v-divider inset></v-divider>
-                          <v-switch dense v-model="item.add" label="Add to Set" inset></v-switch>
-                        </v-container>
-                        
-                        <v-expand-transition>
-                            <div v-show="item.shown">
-                                <v-divider></v-divider>
-                                <v-list two-line dense>
-                                    <v-subheader>Similar faces</v-subheader>
-                                    <v-list-item v-for="(similar, n) in item.similar" :key="n">
-                                        <v-list-item-avatar>
-                                            <v-img :src="similar.face"></v-img>
-                                        </v-list-item-avatar>
-                                        <v-list-item-content>
-                                            <v-list-item-title>{{ similar.weight }}</v-list-item-title>
-                                            <v-list-item-subtitle>{{ similar.user }}</v-list-item-subtitle>
-                                        </v-list-item-content>
-                                    </v-list-item>
-                                </v-list>
-                            </div>
-                        </v-expand-transition>
-                    </v-card>
-                </v-col>
-            </v-row>
-        </v-col>
-
-        <v-col cols="3">
-            <v-list>
-                <v-subheader>Filter audit entries</v-subheader>
-                <v-list-item>
-                    <v-list-item-content>
-                        <v-row>
-                            <v-col cols="12">
-                                <v-select dense :items="datetimes" label="Date range" outlined></v-select>
-                            </v-col>
-                            <v-col cols="12">
-                                <v-select dense :items="devices" label="Device" outlined></v-select>
-                            </v-col>
-                            <v-col cols="12">
-                                <v-select dense :items="failures" label="Type of failure" outlined></v-select>
-                            </v-col>
-                            <v-col cols="12">
-                                <v-select dense :items="confidence" label="Confidence" outlined></v-select>
-                            </v-col>
-                            <v-col cols="12">
-                                <v-select dense :items="status" label="Status" outlined></v-select>
-                            </v-col>
-                            <v-col cols="12">
-                                <v-btn color="success" block dark elevation="0">Filter Search</v-btn>
-                            </v-col>
-                        </v-row>
-                    </v-list-item-content>
-                </v-list-item>
-            </v-list>
-        </v-col>
-    </v-row>
+            <v-col cols="3">
+                <v-list>
+                    <v-subheader>Filter audit entries</v-subheader>
+                    <v-list-item>
+                        <v-list-item-content>
+                            <v-row>
+                                <v-col cols="12">
+                                    <v-select dense :items="datetimes" label="Date range" outlined></v-select>
+                                </v-col>
+                                <v-col cols="12">
+                                    <v-select dense :items="devices" label="Device" outlined></v-select>
+                                </v-col>
+                                <v-col cols="12">
+                                    <v-select dense :items="failures" label="Type of failure" outlined></v-select>
+                                </v-col>
+                                <v-col cols="12">
+                                    <v-select dense :items="confidence" label="Confidence" outlined></v-select>
+                                </v-col>
+                                <v-col cols="12">
+                                    <v-select dense :items="status" label="Status" outlined></v-select>
+                                </v-col>
+                                <v-col cols="12">
+                                    <v-btn color="success" block dark elevation="0">Filter Search</v-btn>
+                                </v-col>
+                            </v-row>
+                        </v-list-item-content>
+                    </v-list-item>
+                </v-list>
+            </v-col>
+        </v-row>
+    </v-app>
 </template>
 
 <script>
+import AuditItem from '@/components/AuditItem.vue'
 export default {
+    components: { AuditItem },
   data: () => ({
     datetimes: ['LastMonth', 'Last2Months', 'Last3Months', 'Last6Months'],
     devices: ['device1', 'device2', 'device3', 'device4'],
