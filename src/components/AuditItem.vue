@@ -8,8 +8,8 @@
 </style>
 
 <template>
-    <v-hover v-slot="{ hover }">
-        <v-card class="pa-2" outlined>
+    <v-card outlined>
+        <v-card class="pa-2" flat>
             <v-img src="@/assets/logo.png" class="white--text align-end" style="max-height:250px">
                 <v-card-title style="text-shadow: 0px 0px 5px #000, 0 0px 5px #000, 0 0px 5px #000, 0px 0 5px #000">
                     item.status item.createdDateTime
@@ -19,38 +19,43 @@
                 <img src="@/assets/spoof.gif" style="width:100px;height:100px" v-if="isSpoof" />
                 <img src="@/assets/real.gif" style="width:100px;height:100px" v-if="!isSpoof" />
             </div>
-            <v-card-subtitle class="pb-0">item.deviceName</v-card-subtitle>
-            <v-card-text class="text--primary">
-                <v-row>
-                    <v-col cols="6" style="text-align:center">
-                        <h3>Real Confidence</h3>
-                    </v-col>
-                    <v-col cols="6" style="text-align:center">
-                        <h3>Spoof Confidence</h3>
-                    </v-col>
-                </v-row>
-                <v-row>
-                    <v-col cols="6" style="text-align:center">
-                        <v-progress-circular :rotate="360" :size="80" :width="15" value="75" color="success">75</v-progress-circular>
-                    </v-col>
-                    <v-col cols="6" style="text-align:center">
-                        <v-progress-circular :rotate="360" :size="80" :width="15" :value="46" color="error">46</v-progress-circular>
-                    </v-col>
-                </v-row>
-
-                <v-fade-transition>
-                    <v-overlay absolute opacity="1.0" v-if="hover">                           
-                        <h4 style="margin-left:-30px">Mark audit as:</h4>
-                        <v-switch v-model="isIncorrectResult" label="Wrong" id="wrongSwitch" color="error" />
-                        <v-switch v-model="isTestSetCandidate" label="Test Candidate" color="primary" />
-                    </v-overlay>
-                </v-fade-transition>
-                <v-overlay absolute :value="loading">
-                    <v-progress-circular indeterminate size="32"></v-progress-circular>
-                </v-overlay>
-            </v-card-text>
         </v-card>
-    </v-hover>
+
+        <v-hover v-slot="{ hover }" open-delay="200">
+            <v-card flat>
+                <v-card-subtitle class="pb-0">item.deviceName</v-card-subtitle>
+                <v-card-text class="text--primary">
+                    <v-row>
+                        <v-col cols="6" style="text-align:center">
+                            <h3>Real Confidence</h3>
+                        </v-col>
+                        <v-col cols="6" style="text-align:center">
+                            <h3>Spoof Confidence</h3>
+                        </v-col>
+                    </v-row>
+                    <v-row>
+                        <v-col cols="6" style="text-align:center">
+                            <v-progress-circular :rotate="360" :size="80" :width="15" value="75" color="success">75</v-progress-circular>
+                        </v-col>
+                        <v-col cols="6" style="text-align:center">
+                            <v-progress-circular :rotate="360" :size="80" :width="15" :value="46" color="error">46</v-progress-circular>
+                        </v-col>
+                    </v-row>
+
+                    <v-fade-transition>
+                        <v-overlay absolute opacity="1.0" v-if="hover">                           
+                            <h4>Mark spoof review as:</h4>
+                            <v-switch v-model="isIncorrectResult" label="Wrong" id="wrongSwitch" color="error" />
+                            <v-switch v-model="isTestSetCandidate" label="Test Candidate" color="primary" />
+                        </v-overlay>
+                    </v-fade-transition>
+                    <v-overlay absolute :value="loading">
+                        <v-progress-circular indeterminate size="32"></v-progress-circular>
+                    </v-overlay>
+                </v-card-text>
+            </v-card>
+        </v-hover>
+    </v-card>
 </template>
 
 <script>
