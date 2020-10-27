@@ -1,7 +1,7 @@
 <template>
     <v-app>
         <v-row>
-            <v-col v-for="item in 7" :key="item" cols="12" md="4">
+            <v-col v-for="item in 7" :key="item" cols="12" md="3">
                 <AuditItem></AuditItem>
             </v-col>
 

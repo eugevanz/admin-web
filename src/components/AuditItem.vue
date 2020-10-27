@@ -10,9 +10,10 @@
 <template>
     <v-card outlined>
         <v-card class="pa-2" flat>
-            <v-img src="@/assets/logo.png" class="white--text align-end" style="max-height:250px">
+            <v-img src="@/assets/Screenshot 2020-10-27 092719.png" class="white--text align-end" style="max-height:250px">
                 <v-card-title style="text-shadow: 0px 0px 5px #000, 0 0px 5px #000, 0 0px 5px #000, 0px 0 5px #000">
-                    item.status item.createdDateTime
+                    status<br/>
+                    createdDateTime
                 </v-card-title>
             </v-img>
             <div style="position:absolute; top:0px; right:0px;">
@@ -23,7 +24,7 @@
 
         <v-hover v-slot="{ hover }" open-delay="200">
             <v-card flat>
-                <v-card-subtitle class="pb-0">item.deviceName</v-card-subtitle>
+                <v-card-subtitle class="pb-0">deviceName</v-card-subtitle>
                 <v-card-text class="text--primary">
                     <v-row>
                         <v-col cols="6" style="text-align:center">
@@ -43,7 +44,7 @@
                     </v-row>
 
                     <v-fade-transition>
-                        <v-overlay absolute opacity="1.0" v-if="hover">                           
+                        <v-overlay absolute opacity="0.95" v-if="hover">                           
                             <h4>Mark spoof review as:</h4>
                             <v-switch v-model="isIncorrectResult" label="Wrong" id="wrongSwitch" color="error" class="mb-n7"/>
                             <v-switch v-model="isTestSetCandidate" label="Test Candidate" color="primary" />
